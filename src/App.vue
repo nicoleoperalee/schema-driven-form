@@ -4,13 +4,17 @@
       <div class="navbar-inner">
         <span class="brand">AutoForm</span>
         <div class="nav-links">
-          <router-link to="/">Home</router-link>
-          <router-link to="/demo">Demo</router-link>
+          <router-link to="/">{{ t.nav.home }}</router-link>
+          <router-link to="/demo">{{ t.nav.demo }}</router-link>
+          <router-link to="/playground">{{ t.nav.playground }}</router-link>
           <a
             href="https://github.com/nicoleoperalee/schema-driven-form"
             target="_blank"
             rel="noopener"
-          >GitHub</a>
+          >{{ t.nav.github }}</a>
+          <button class="lang-btn" @click="toggleLang">
+            {{ lang === 'zh' ? 'EN' : '中文' }}
+          </button>
         </div>
       </div>
     </nav>
@@ -20,12 +24,20 @@
   </div>
 </template>
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+<script>
+import { computed } from 'vue'
+import { lang, toggleLang, messages } from '@/i18n'
+
+export default {
+  setup() {
+    const t = computed(() => messages[lang.value])
+    return { lang, toggleLang, t }
+  },
 }
+</script>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -33,15 +45,8 @@ body {
   color: #1a1a2e;
 }
 
-#app-root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
+#app-root { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
 
 .navbar {
   background: #fff;
@@ -52,7 +57,7 @@ main {
 }
 
 .navbar-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   height: 56px;
@@ -72,7 +77,7 @@ main {
 
 .nav-links {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -86,6 +91,23 @@ main {
 
 .nav-links a:hover,
 .nav-links a.router-link-active {
+  color: #409eff;
+}
+
+.lang-btn {
+  background: none;
+  border: 1.5px solid #d0d5dd;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.lang-btn:hover {
+  border-color: #409eff;
   color: #409eff;
 }
 </style>
