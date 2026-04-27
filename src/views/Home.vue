@@ -14,7 +14,7 @@
         <div class="hero-actions">
           <router-link to="/demo" class="btn-primary">Try Live Demo →</router-link>
           <a
-            href="https://github.com/nicoleoperalee/autoform-demo"
+            href="https://github.com/nicoleoperalee/schema-driven-form"
             target="_blank"
             rel="noopener"
             class="btn-ghost"
